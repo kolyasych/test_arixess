@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +15,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('index');
+})->name('home');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['middleware' => ["auth", "role:client"]], function (){
+    Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications');
+    Route::post('/applications/store', [ApplicationsController::class, 'store'])->name('applications.store');
+});
+
