@@ -30,6 +30,7 @@ Route::group(['middleware'=> ['auth']], function () {
     Route::group(['middleware' => ["role:manager"], 'prefix' => 'admin'], function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.index');
         Route::get('/application/{id}', [AdminController::class, 'showApplication'])->name('application.show');
+        Route::get('/application/change-status/{id}', [AdminController::class, 'changeStatus'])->name('application.changeStatus');
     });
 });
 
