@@ -21,7 +21,12 @@
                         <td>{{$application['subject']}}</td>
                         <td>{{$application->user['name']}}</td>
                         <td>{{$application->user['email']}}</td>
-                        <td>@mdo</td>
+                        <td>
+                            @if(!empty($application['file_path']))
+                                <a target="_blank" href="{{url('storage/'.$application['file_path'])}}">Посилання на
+                                    файл</a>
+                            @endif
+                        </td>
                         <td>{{$application['created_at']}}</td>
                         <td>{{$application->status['title']}}</td>
                     </tr>

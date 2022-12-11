@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-6">
-                <form action="{{route('applications.store')}}" method="post">
+                <form action="{{route('applications.store')}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="mb-3">
                         <label for="subject" class="form-label">Тема повідомлення</label>
@@ -23,6 +23,7 @@
                         <p class="text-danger">{{$message}}</p>
                         @enderror
                     </div>
+                    <input class="mb-3" id="dropzone" type="file" name="file">
                     <input type="hidden" name="user_id" value="{{$user->id}}">
                     <div class="form-group">
                         <button class="btn btn-primary">Відправити</button>

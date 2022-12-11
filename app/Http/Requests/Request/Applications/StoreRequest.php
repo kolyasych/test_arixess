@@ -26,7 +26,8 @@ class StoreRequest extends FormRequest
         return [
             'subject' => 'required|min:3|max:50|',
             'message' => 'required',
-            'user_id' => 'required|integer'
+            'user_id' => 'required|integer',
+            'file' => 'nullable|file',
         ];
     }
 

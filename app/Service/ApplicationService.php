@@ -5,6 +5,7 @@ namespace App\Service;
 use App\Jobs\SendApplicationWithQueue;
 use App\Models\Applications;
 use App\Models\StatusApplication;
+use Illuminate\Support\Facades\Storage;
 
 class ApplicationService
 {
@@ -21,6 +22,12 @@ class ApplicationService
     {
         $status = StatusApplication::where('slug', '=', $this->defaultStatus)->first();
         $data['status_id'] = $status['id'];
+        if (isset($data['file'])) {
+            $file = $data['file'];
+            unset($data['file']);
+            $filePath = Storage::disk('public')->put('/images', $file);
+            $data['file_path'] = $filePath;
+        }
         return Applications::create($data);
     }
 
