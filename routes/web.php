@@ -21,8 +21,8 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::group(['middleware'=> ['auth']], function () {
-    Route::group(['middleware' => ["role:client"]], function (){
+Route::group(['middleware' => ['auth']], function () {
+    Route::group(['middleware' => ["role:client"]], function () {
         Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications');
         Route::post('/applications/store', [ApplicationsController::class, 'store'])->name('applications.store');
     });

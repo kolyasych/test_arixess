@@ -38,11 +38,14 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
+    /**
+     * @return string
+     */
     public function redirectPath()
     {
-        if(auth()->user()->hasRole('client')) {
+        if (auth()->user()->hasRole('client')) {
             return route('applications');
-        } else if(auth()->user()->hasRole('manager')) {
+        } else if (auth()->user()->hasRole('manager')) {
             return route('admin.index');
         }
         return property_exists($this, 'redirectTo') ? $this->redirectTo : '/';

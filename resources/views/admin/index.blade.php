@@ -13,14 +13,14 @@
                     </tr>
                     </thead>
                     <tbody>
-                        @foreach($applications as $application)
-                            <tr>
-                                <th scope="row">{{$application['id']}}</th>
-                                <td>{{$application['subject']}}</td>
-                                <td><a href="{{route('application.show', $application['id'])}}">Переглянути</a></td>
-                                <td>{{$application->status['title']}}</td>
-                            </tr>
-                        @endforeach
+                    @foreach($applications as $application)
+                        <tr>
+                            <th scope="row">{{$application['id']}}</th>
+                            <td>{{$application['subject']}}</td>
+                            <td><a href="{{route('application.show', $application['id'])}}">Переглянути</a></td>
+                            <td>{{$application->status['title']}}</td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

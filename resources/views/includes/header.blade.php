@@ -3,7 +3,8 @@
         <a class="navbar-brand" href="{{ url('/') }}">
             {{ config('app.name', 'Laravel') }}
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
             <span class="navbar-toggler-icon"></span>
         </button>
 
@@ -29,7 +30,7 @@
                         <a href="{{route('admin.index')}}">Адмінка</a>
                     @endcan
                     <li class="nav-item mx-4">
-                            {{ Auth::user()->name }}
+                        {{ Auth::user()->name }}
                     </li>
                     <li>
                         <form class="btn btn-primary" action="{{ route('logout') }}" method="POST">

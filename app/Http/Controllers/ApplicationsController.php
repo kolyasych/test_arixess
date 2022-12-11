@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Request\Applications\StoreRequest;
+use App\Http\Requests\Applications\StoreRequest;
 use App\Models\Applications;
 use App\Service\ApplicationService;
 use Carbon\Carbon;
@@ -28,7 +28,7 @@ class ApplicationsController extends Controller
         $user = auth()->user();
 
         $lastMessage = Applications::where('user_id', $user['id'])->latest('created_at')->first();
-        if(!empty($lastMessage) && Carbon::parse($lastMessage['created_at'])->diffInHours(Carbon::now())<24){
+        if (!empty($lastMessage) && Carbon::parse($lastMessage['created_at'])->diffInHours(Carbon::now()) < 24) {
             return view('waiting-page');
         } else {
             return view('application-form')->with([
