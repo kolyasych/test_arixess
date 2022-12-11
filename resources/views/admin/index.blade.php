@@ -9,6 +9,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Тема повідомлення</th>
                         <th scope="col">Дія</th>
+                        <th scope="col">Статус</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -17,6 +18,7 @@
                                 <th scope="row">{{$application['id']}}</th>
                                 <td>{{$application['subject']}}</td>
                                 <td><a href="{{route('application.show', $application['id'])}}">Переглянути</a></td>
+                                <td>{{$application->status['title']}}</td>
                             </tr>
                         @endforeach
                     </tbody>

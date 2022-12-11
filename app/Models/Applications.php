@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Applications extends Model
 {
     use HasFactory;
-    use SoftDeletes;
+//    use SoftDeletes;
 
     protected $table = 'applications';
     protected $guarded = false;
@@ -20,5 +20,14 @@ class Applications extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+
+    public function status()
+    {
+        return $this->belongsTo(StatusApplication::class, 'status_id', 'id');
     }
 }
