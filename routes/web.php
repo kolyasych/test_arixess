@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ApplicationsController;
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,9 +21,16 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::group(['middleware'=> ['auth']], function () {
+    Route::group(['middleware' => ["role:client"]], function (){
+        Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications');
+        Route::post('/applications/store', [ApplicationsController::class, 'store'])->name('applications.store');
+    });
 
-Route::group(['middleware' => ["auth", "role:client"]], function (){
-    Route::get('/applications', [ApplicationsController::class, 'index'])->name('applications');
-    Route::post('/applications/store', [ApplicationsController::class, 'store'])->name('applications.store');
+    Route::group(['middleware' => ["role:manager"], 'prefix' => 'admin'], function () {
+        Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+        Route::get('/application/{id}', [AdminController::class, 'showApplication'])->name('application.show');
+    });
 });
+
 

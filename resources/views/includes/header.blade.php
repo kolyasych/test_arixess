@@ -25,6 +25,9 @@
                         </li>
                     @endif
                 @else
+                    @can('edit applications')
+                        <a href="{{route('admin.index')}}">Адмінка</a>
+                    @endcan
                     <li class="nav-item mx-4">
                             {{ Auth::user()->name }}
                     </li>
