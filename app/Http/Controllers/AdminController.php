@@ -3,11 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Applications;
-use App\Models\StatusApplication;
-use Illuminate\Http\Request;
+use App\Service\AdminService;
 
 class AdminController extends Controller
 {
+    /**
+     * @var AdminService
+     */
+    private $service;
+
+    public function __construct(AdminService $service)
+    {
+        $this->service = $service;
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function index()
     {
         $applications = Applications::with('status')->get();
@@ -16,6 +28,10 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function showApplication($id)
     {
         $application = Applications::with(['user', 'status'])->firstWhere('id', $id);
@@ -24,12 +40,13 @@ class AdminController extends Controller
         ]);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function changeStatus($id)
     {
-        $application = Applications::where('id', '=', $id)->first();
-        $status = StatusApplication::where('slug', '=', 'read')->first();
-        $application['status_id'] = $status['id'];
-        $application->save();
+        $this->service->changeStatus($id);
         return redirect()->route('admin.index');
     }
 
